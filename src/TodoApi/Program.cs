@@ -12,14 +12,14 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    _ = app.UseSwagger();
+    _ = app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+_ = app.UseHttpsRedirection();
 
-app.UseAuthorization();
+_ = app.UseAuthorization();
 
-app.MapControllers();
+_ = app.MapControllers();
 
 app.Run();
