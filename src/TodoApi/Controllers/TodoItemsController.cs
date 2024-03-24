@@ -79,12 +79,4 @@ public class TodoItemsController(TodoContext context) : ControllerBase
     {
         return context.TodoItems.Any(e => e.Id == id);
     }
-
-    private static TodoItemDto ItemToDto(TodoItem todoItem) =>
-        new()
-        {
-            Id = todoItem.Id,
-            Name = todoItem.Name,
-            IsComplete = todoItem.IsComplete
-        };
 }
