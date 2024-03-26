@@ -1,0 +1,2 @@
+docker pull docker/welcome-to-docker
+docker run --name welcome -p 8089:80 -d docker/welcome-to-docker
