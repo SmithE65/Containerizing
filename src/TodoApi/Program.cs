@@ -9,23 +9,14 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Add DbContext using SQL Server Provider
-var todoConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
 builder.Services.AddDbContext<TodoContext>(options =>
-    options.UseSqlServer(todoConnectionString));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 WebApplication app = builder.Build();
-
-// Create a logger instance
-var logger = app.Services.GetService<ILogger<Program>>()
-    ?? throw new InvalidOperationException("Failed to resolve logger for Program");
-
-// Log the connection string at the info level
-logger.LogInformation("Connection string: {ConnectionString}", todoConnectionString);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

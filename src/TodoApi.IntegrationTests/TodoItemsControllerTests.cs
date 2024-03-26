@@ -20,7 +20,6 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
         {
             // Generate a unique database name
             string dbName = Guid.NewGuid().ToString();
-
             // Read the existing connection string
             IConfigurationRoot configuration = conf.Build();
             // Replace the database name in the connection string
