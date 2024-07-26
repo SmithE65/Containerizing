@@ -14,6 +14,16 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection=Server=db;Database=Todos;User=sa;Password=${DB_PASSWORD};TrustServerCertificate=True;
 
+  migration:
+    image: ${DOCKER_REGISTRY-}migration
+    build:
+      context: .
+      dockerfile: MigrationService/Dockerfile
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=Todos;User=sa;Password=${DB_PASSWORD};TrustServerCertificate=True;
+
   db:
     image: "mcr.microsoft.com/mssql/server"
     environment:

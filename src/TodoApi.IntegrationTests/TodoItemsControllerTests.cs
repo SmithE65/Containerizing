@@ -38,18 +38,19 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
     }
 }
 
-public class TodoItemsControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class TodoItemsControllerTests //: IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly CustomWebApplicationFactory<Program> _factory;
+    //private readonly CustomWebApplicationFactory<Program> _factory;
     private readonly HttpClient _client;
 
-    public TodoItemsControllerTests(CustomWebApplicationFactory<Program> factory)
+    public TodoItemsControllerTests(/*CustomWebApplicationFactory<Program> factory*/)
     {
-        _factory = factory;
+        //_factory = factory;
+        var factory = new CustomWebApplicationFactory<Program>();
         _client = factory.CreateClient();
 
         // Now that the DbContext is registered with the new connection string, we can run migrations.
-        using IServiceScope scope = _factory.Services.CreateScope();
+        using IServiceScope scope = factory.Services.CreateScope();
         TodoContext dbContext = scope.ServiceProvider.GetRequiredService<TodoContext>();
         dbContext.Database.Migrate();
     }
